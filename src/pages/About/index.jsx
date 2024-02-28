@@ -2,7 +2,7 @@ import Header from "../../components/Header";
 import ImageWithCaption from "../../components/ImageWithCaption";
 const About = () => {
     return (
-        <div className="p-6">
+        <div className="p-6 ">
             <Header 
                 title="Sistema de Monitoreo de Inventario en Tiempo Real" 
                 subtitle="Transformando la gestión de inventarios en el ámbito hospitalario" 

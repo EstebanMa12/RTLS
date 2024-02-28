@@ -17,7 +17,7 @@ import Calendar from '../pages/Calendar';
 const AppRouter = () => {
     const { collapseSidebar } = useProSidebar();
     return (
-        <div className='flex h-full'>
+        <div className='flex h-full '>
             <Sidebar style={{ height: "100vh"}}>
             <Menu iconShape="square"
                 // menuItemStyles={{
@@ -79,7 +79,7 @@ const AppRouter = () => {
                 </MenuItem>
             </Menu>
             </Sidebar>
-            <section>
+            <section className=' w-full'>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
@@ -87,7 +87,6 @@ const AppRouter = () => {
                     <Route path="/report" element={<Report />} />
                     <Route path="/calendar" element={<Calendar />} /> 
                 </Routes>
-            
             </section>
         </div>
     );
