@@ -1,18 +1,56 @@
 import Header from "../../components/Header";
+import ImageWithCaption from "../../components/ImageWithCaption";
 const Home = () => {
     return (
-        <div className="p-6">
-            <Header title="Sistema de Monitoreo de Inventario en Tiempo Real" subtitle="Transformando la gestión de inventarios en el ámbito hospitalario" />
-        
-            <main className="container mx-auto mt-8">
-            <section className="bg-white p-6 rounded-lg shadow-md">
-                <h2 className="text-2xl font-semibold mb-4">Introducción</h2>
-                <p className="text-gray-700">
+        <div className="p-6 ">
+            <Header 
+                title="Sistema de Monitoreo de Inventario en Tiempo Real" 
+                subtitle="Transformando la gestión de inventarios en el ámbito hospitalario" 
+            />        
+            <main className="container mx-auto mt-8 w-full
+            ">
+            <section className="
+            bg-white 
+            p-6 
+            rounded-lg 
+            shadow-md 
+            grid grid-cols-3 
+            gap-6
+            ">
+                <h2 className="text-2xl font-semibold col-span-3">Introducción</h2>
+                <p className="text-gray-700 col-span-2 flex items-center">
                     En general, para que las actividades logísticas tengan un buen resultado se deben cumplir siete
                     condiciones: el material adecuado, en el momento adecuado, en la cantidad adecuada, por el costo
                     adecuado, de la calidad adecuada, con la información adecuada en el lugar adecuado.
-                    Si se cumplen estas características, se habla de una buena gestión logística [1].
+                    Si se cumplen estas características, se habla de una buena gestión logística .
                 </p>
+                <ImageWithCaption
+                    src= "https://emedingenieria.com/wp-content/uploads/2023/07/maintenance.webp"
+                    alt = "RTLS"
+                />
+                <ImageWithCaption
+                    src= "https://www.eoi.es/blogs/madeon/files/2013/06/inventarios1.jpg"
+                    alt = "RTLS"
+                />
+                <p className="text-gray-700 flex items-center col-span-2">
+                En este orden de ideas, la gestión de inventarios en hospitales representa un desafío mayor a las aplicaciones en otras industrias debido a la importancia de evitar faltantes en el inventario que puede afectar la salud de los pacientes al no contar los recursos requeridos para un apropiado tratamiento y/o intervención, lo que hace necesario el desarrollo de herramientas que faciliten un manejo efectivo de las existencias para este tipo de instituciones
+                </p>
+                <ImageWithCaption
+                    src= "https://www.hhmglobal.com/wp-content/uploads/articles/23092/RTL_Systems.jpg"
+                    alt = "RTLS"
+                />
+                <ImageWithCaption
+                    src= "https://www.mokosmart.com/wp-content/uploads/2021/08/What-is-an-RTLS.webp"
+                    alt = "RTLS"
+                />
+                <div className="flex  col-span-2">
+                    <ImageWithCaption
+                        src="https://rmsomega.com/wp-content/uploads/2021/09/Sewio-RTLS-Use-Case_-Indoor-Location-Tracking-Positioning-low-1.gif"
+                        alt="RTLS"
+                    />
+                </div>
+
+
 
             </section>
                 <section className="bg-white p-6 rounded-lg shadow-md mt-4">
