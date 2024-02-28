@@ -17,13 +17,24 @@ import Calendar from '../pages/Calendar';
 const AppRouter = () => {
     const { collapseSidebar } = useProSidebar();
     return (
-        <div className='flex'>
+        <div className='flex h-full'>
             <Sidebar style={{ height: "100vh"}}>
-            <Menu iconShape="square">
+            <Menu iconShape="square"
+                // menuItemStyles={{
+                //     button: ({ level, active, disabled }) => {
+                //       // only apply styles on first level elements of the tree
+                //       if (level === 0)
+                //         return {
+                //           color: disabled ? '#f5d9ff' : '#d359ff',
+                //           backgroundColor: active ? '#eecef9' : undefined,
+                //         };
+                //     },
+                //   }}
+
+            >
                 <MenuItem
                     icon={<MenuOutlinedIcon/>}
                     onClick={() => {
-                        console.log("click");
                         collapseSidebar();
                     }}
                     style = {{cursor: "pointer", textAlign: "center"}}
@@ -33,22 +44,38 @@ const AppRouter = () => {
                     text-2xl
                     font-bold
                     text-center
-                    ">Actions</h2>
+                    text-orange-800
+                    ">RTLS System</h2>
                 </MenuItem>
-                <MenuItem icon={<HomeOutlinedIcon />}>
-                    <Link to="/">Home</Link>
+                <MenuItem 
+                    icon={<HomeOutlinedIcon/>}
+                    component={<Link to="/"/>}
+                >
+                    Home
                 </MenuItem>
-                <MenuItem icon={<PeopleOutlinedIcon />}>
-                    <Link to="/about">About</Link>
+                <MenuItem 
+                    icon={<PeopleOutlinedIcon />}
+                    component={<Link to="/about" />}
+                >
+                    About
                 </MenuItem>
-                <MenuItem icon={<ContactsOutlinedIcon />}>
-                    <Link to="/register">Registrar Equipo</Link>
+                <MenuItem 
+                    icon={<ContactsOutlinedIcon />}
+                    component={<Link to="/register" />}
+                >
+                    Registrar Equipo
                 </MenuItem>
-                <MenuItem icon={<ReceiptOutlinedIcon />}>
-                    <Link to="/report">Reporte</Link>
+                <MenuItem 
+                    icon={<ReceiptOutlinedIcon />}
+                    component={<Link to="/report" />}
+                >
+                    Reporte
                 </MenuItem>
-                <MenuItem icon={<CalendarTodayOutlinedIcon />}>
-                    <Link to="/calendar">Calendario</Link>
+                <MenuItem 
+                    icon={<CalendarTodayOutlinedIcon />}
+                    component={<Link to="/calendar" />}
+                >
+                    Calendario
                 </MenuItem>
             </Menu>
             </Sidebar>
