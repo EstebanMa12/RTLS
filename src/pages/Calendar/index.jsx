@@ -32,6 +32,7 @@ const CalendarComponent = () => {
                 start: selectInfo.startStr,
                 end: selectInfo.endStr,
                 allDay: selectInfo.allDay,
+                color: "primary",
             });
         }
     }
