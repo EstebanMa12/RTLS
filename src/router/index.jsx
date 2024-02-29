@@ -8,6 +8,7 @@ import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import DevicesFoldIcon from '@mui/icons-material/DevicesFold';
 import Home from '../pages/Home';
 import About from '../pages/About';
 import RegisterDevice from '../pages/RegisterDevice';
@@ -59,6 +60,12 @@ const AppRouter = () => {
                 >
                     About
                 </MenuItem>
+                <MenuItem
+                    icon={<DevicesFoldIcon />}
+                    component={<Link to="/devices" />}
+                >
+                    Devices Information
+                </MenuItem>
                 <MenuItem 
                     icon={<ContactsOutlinedIcon />}
                     component={<Link to="/register" />}
@@ -85,7 +92,9 @@ const AppRouter = () => {
                     <Route path="/about" element={<About />} />
                     <Route path="/register" element={<RegisterDevice />} />
                     <Route path="/report" element={<Report />} />
-                    <Route path="/calendar" element={<Calendar />} /> 
+                    <Route path="/calendar" element={<Calendar />} />
+                    <Route path="/devices" element={<h1>Devices</h1>} /> 
+                    <Route path="*" element={<h1>Not Found</h1>} />
                 </Routes>
             </section>
         </div>
