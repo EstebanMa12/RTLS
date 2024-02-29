@@ -14,6 +14,7 @@ import About from '../pages/About';
 import RegisterDevice from '../pages/RegisterDevice';
 import Report from '../pages/Report';
 import Calendar from '../pages/Calendar';
+import Devices from '../pages/Devices';
 
 const AppRouter = () => {
     const { collapseSidebar } = useProSidebar();
@@ -93,7 +94,7 @@ const AppRouter = () => {
                     <Route path="/register" element={<RegisterDevice />} />
                     <Route path="/report" element={<Report />} />
                     <Route path="/calendar" element={<Calendar />} />
-                    <Route path="/devices" element={<h1>Devices</h1>} /> 
+                    <Route path="/devices" element={<Devices/>} /> 
                     <Route path="*" element={<h1>Not Found</h1>} />
                 </Routes>
             </section>
