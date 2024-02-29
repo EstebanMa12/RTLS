@@ -102,10 +102,21 @@ const CalendarComponent = () => {
             
         {/* CALENDAR */}
             <Box 
-                flex="1 1 80%"
-                p="15px"
-                borderRadius="4px"
-                bgcolor={"#CFE0CB"}
+                sx={{
+                flex:"1 1 80%",
+                p:"15px",
+                borderRadius:"4px",
+                bgcolor:"#CFE0CB",
+                boxShadow:"0 4px 8px 0 rgba(0,0,0,0.2)",
+                width:"90%",
+                height:"50%",
+                '@media (max-width: 600px)': {
+                    width:"70%"
+                },
+                '@media (min-width: 960px)': {
+                    width:"50%"
+                }
+            }}
             >
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
@@ -132,6 +143,10 @@ const CalendarComponent = () => {
                             color: "white",
                             borderRadius: "4px",
                             padding: "5px",
+                            fontSize: "12px",
+                            '@media (max-width: 600px)': {
+                                padding: "10px",
+                            },
                         }}
                         >
                         {arg.timeText}
