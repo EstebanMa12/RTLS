@@ -1,6 +1,6 @@
 import { db } from "../config/database/firebase/firebaseConfig";
 
-export const createRecord = async (value) => {
+export const createRecordFB = async (value) => {
     try {
         return db.collection("users").add(value);
     } catch (error) {
@@ -8,7 +8,7 @@ export const createRecord = async (value) => {
     }
 }
 
-export const getValues = async () => {
+export const getValuesFB = async () => {
     try {
         return db.collection("users").get();
     } catch (error) {
@@ -16,7 +16,7 @@ export const getValues = async () => {
     }
 }
 
-export const getValueInfo = async (id) => {
+export const getValueInfoFB = async (id) => {
     try {
         return db.collection("users").doc(id).get();
     } catch (error) {
@@ -32,7 +32,7 @@ export const updateValue = async (id, value) => {
     }
 }
 
-export const deleteValue = async (id) => {
+export const deleteValueFB = async (id) => {
     try {
         return db.collection("users").doc(id).delete();
     } catch (error) {
