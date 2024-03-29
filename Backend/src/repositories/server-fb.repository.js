@@ -1,11 +1,41 @@
 import { db } from "../config/database/firebase/firebaseConfig";
 
-export const createServer = async (server) => {
+export const createRecord = async (value) => {
     try {
-        const serverRef = await addDoc(collection(db, "servers"), server);
-        return serverRef.id;
+        return db.collection("users").add(value);
     } catch (error) {
-        console.error("Error adding document: ", error);
-        return error;
+        console.log(error);
     }
-    };
+}
+
+export const getValues = async () => {
+    try {
+        return db.collection("users").get();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getValueInfo = async (id) => {
+    try {
+        return db.collection("users").doc(id).get();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateValue = async (id, value) => {
+    try {
+        return db.collection("users").doc(id).update(value);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const deleteValue = async (id) => {
+    try {
+        return db.collection("users").doc(id).delete();
+    } catch (error) {
+        console.log(error);
+    }
+}
