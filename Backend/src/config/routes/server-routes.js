@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-const router = Router();
+const ServerRoutes = Router();
 
 import { 
     getSensor,
@@ -10,10 +10,10 @@ import {
     deleteSensor,
   } from "../../controllers/server-controller";
 
-router.get('/sensor/', getSensor);
-router.post('/sensor/create', createSensor);
-router.get('/sensor/:id', getSensorInfo);
-router.patch('/sensor/update/:id', updateSensor);
-router.delete('/sensor/delete/:id', deleteSensor);
+ServerRoutes.get('/sensor/', getSensor);
+ServerRoutes.post('/sensor/create', createSensor);
+ServerRoutes.get('/sensor/:id', getSensorInfo);
+ServerRoutes.patch('/sensor/update/:id', updateSensor);
+ServerRoutes.delete('/sensor/delete/:id', deleteSensor);
 
-export default router;
+export default ServerRoutes;
