@@ -1,4 +1,4 @@
-import { Express } from "express";
+import { express } from "express";
 import cors from "cors";
 
 import { ServerRoutes } from "./routes/server-routes";
@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
 
-const app = Express();
+const app = express();
 app.use(cors());
 
 app.set("port", process.env.PORT || 3000);
