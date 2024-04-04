@@ -5,6 +5,8 @@ const { json, urlencoded } = require("express");
 const  ServerRoutes = require("./routes/server-routes");
 const  UserRoutes =  require("./routes/user-routes");
 
+const { startMQTTSubscriber } = require("./sub");
+
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
@@ -15,6 +17,7 @@ app.use(cors());
 app.set("port", process.env.PORT || 3000);
 app.listen(app.get("port"), () => {
     console.log(`Server is running on port ${app.get("port")}`);
+    startMQTTSubscriber()
 });
 
 
@@ -23,6 +26,9 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 //Routes
+app.get("/", (req, res)=>{
+    res.send("The server is running")
+})
 
-app.use("/api", ServerRoutes);
-app.use("/api", UserRoutes);
+app.use(`${process.env.API_VERSION_ROUTE}`, ServerRoutes);
+app.use(`${process.env.API_VERSION_ROUTE}`, UserRoutes);
