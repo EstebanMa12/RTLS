@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
+
 
 const configDB = {
     useNewUrlParser: true,
@@ -6,8 +7,7 @@ const configDB = {
     useFindAndModify: false,
     useCreateIndex: true
 }
-
-export const connect = async () => {
+const connect = async () => {
     try {
         await mongoose.connect(process.env.MONGO_DB_URI, configDB);
         console.log('MongoDB connected');
@@ -16,11 +16,16 @@ export const connect = async () => {
     }
 }
 
-export const disconnect = async () => {
+const disconnect = async () => {
     try {
         await mongoose.disconnect();
         console.log('MongoDB disconnected');
     } catch (error) {
         console.error('Error disconnecting from MongoDB: ', error);
     }
+}
+
+module.exports = {
+    connect,
+    disconnect
 }

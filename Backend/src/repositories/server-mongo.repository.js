@@ -1,7 +1,7 @@
 
-import { ValuesDB } from "../models/values.model";
+const { ValuesDB } = require("../models/values.model");
 
-export const getValues = async () => {
+const getValues = async () => {
     try {
         return ValuesDB.find();
     }catch (error){
@@ -9,7 +9,7 @@ export const getValues = async () => {
     }
 }
 
-export const createRecord = async (value) => {
+const createRecord = async (value) => {
     try {
         return ValuesDB.create(value);
     }catch (error){
@@ -17,7 +17,7 @@ export const createRecord = async (value) => {
     }
 }
 
-export const getValueInfo = async (id) => {
+const getValueInfo = async (id) => {
     try {
         return ValuesDB.findById(id);
     }catch (error){
@@ -26,7 +26,7 @@ export const getValueInfo = async (id) => {
 }
 
 // Update
-export const updateValue = async (id, value) => {
+const updateValue = async (id, value) => {
     try {
         return ValuesDB.findByIdAndUpdate
         (id, value, {new: true});
@@ -37,13 +37,21 @@ export const updateValue = async (id, value) => {
 }
 
 // Delete
-export const deleteValue = async (id) => {
+const deleteValue = async (id) => {
     try {
         return ValuesDB.findByIdAndDelete(id);
     }
     catch (error){
         console.log(error)
     }
+}
+
+module.exports = {
+    createRecord,
+    getValueInfo,
+    getValues,
+    updateValue,
+    deleteValue
 }
 
 

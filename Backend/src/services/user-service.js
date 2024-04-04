@@ -1,14 +1,14 @@
-import {
+const {
     createRecordFB,
     getValueInfoFB,
     getValuesFB,
     updateValueFB,
     deleteValueFB
-} from "../repositories/server-fb.repository";
+} = require("../repositories/server-fb.repository");
 
 // The firebase database will be used to manage the users in the web app 
 
-export const createUser = async (value) => {
+const createUser = async (value) => {
     try {
         return createRecordFB(value);
     } catch (error) {
@@ -16,7 +16,7 @@ export const createUser = async (value) => {
     }
 }
 
-export const getUsers = async () => {
+const getUsers = async () => {
     try {
         return getValuesFB();
     } catch (error) {
@@ -24,7 +24,7 @@ export const getUsers = async () => {
     }
 }
 
-export const getUserInfo = async (id) => {
+const getUserInfo = async (id) => {
     try {
         return getValueInfoFB(id);
     } catch (error) {
@@ -32,7 +32,7 @@ export const getUserInfo = async (id) => {
     }
 }
 
-export const updateUser = async (id, value) => {
+const updateUser = async (id, value) => {
     try {
         return updateValueFB(id, value);
     } catch (error) {
@@ -40,10 +40,18 @@ export const updateUser = async (id, value) => {
     }
 }
 
-export const deleteUser = async (id) => {
+const deleteUser = async (id) => {
     try {
         return deleteValueFB(id);
     } catch (error) {
         console.log(error);
     }
+}
+
+module.exports = {
+    createUser,
+    getUsers,
+    getUserInfo,
+    updateUser,
+    deleteUser
 }

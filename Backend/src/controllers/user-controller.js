@@ -1,12 +1,12 @@
-import {
+const {
     createUser,
     getUsers,
     getUserInfo,
     updateUser,
     deleteUser
-} from '../services/user-service';
+} = require('../services/user-service');
 
-export const getUser = async (req, res) => {
+const getUserController = async (req, res) => {
     try {
         const values = await getUsers();
         res.status(200).json(values);
@@ -15,7 +15,7 @@ export const getUser = async (req, res) => {
     }
 }
 
-export const createUser = async (req, res) => {
+const createUserController = async (req, res) => {
     const value = req.body;
     try {
         const newValue = await createUser(value);
@@ -25,7 +25,7 @@ export const createUser = async (req, res) => {
     }
 }
 
-export const getUserInfo = async (req, res) => {
+const getUserInfoController = async (req, res) => {
     const { id } = req.params;
     try {
         const value = await getUserInfo(id);
@@ -35,7 +35,7 @@ export const getUserInfo = async (req, res) => {
     }
 }
 
-export const updateUser = async (req, res) => {
+const updateUserController = async (req, res) => {
     const { id } = req.params;
     const value = req.body;
     try {
@@ -46,7 +46,7 @@ export const updateUser = async (req, res) => {
     }
 }
 
-export const deleteUser = async (req, res) => {
+const deleteUserController = async (req, res) => {
     const { id } = req.params;
     try {
         await deleteUser(id);
@@ -54,4 +54,12 @@ export const deleteUser = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
+}
+
+module.exports = {
+    getUserController,
+    createUserController,
+    getUserInfoController,
+    updateUserController,
+    deleteUserController
 }

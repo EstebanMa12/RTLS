@@ -1,15 +1,15 @@
-import { 
+const { 
     createRecord, 
     getValueInfo, 
     getValues, 
     updateValue,
     deleteValue
-} from "../repositories/server-mongo.repository";
+} = require("../repositories/server-mongo.repository");
 
 
 
 // The mongo database will be used by the sensor and MQTT protocol
-export const createSensorValue = async (value) => {
+const createSensorValue = async (value) => {
     try {
         return createRecord(value);
     } catch (error) {
@@ -17,7 +17,7 @@ export const createSensorValue = async (value) => {
     }
 }
 
-export const getSensorValues = async () => {
+const getSensorValues = async () => {
     try {
         return getValues();
     } catch (error) {
@@ -25,7 +25,7 @@ export const getSensorValues = async () => {
     }
 }
 
-export const getSensorValueInfo = async (id) => {
+const getSensorValueInfo = async (id) => {
     try {
         return getValueInfo(id);
     } catch (error) {
@@ -33,7 +33,7 @@ export const getSensorValueInfo = async (id) => {
     }
 }
 
-export const updateSensorValue = async (id, value) => {
+const updateSensorValue = async (id, value) => {
     try {
         return updateValue(id, value);
     } catch (error) {
@@ -41,7 +41,7 @@ export const updateSensorValue = async (id, value) => {
     }
 }
 
-export const deleteSensorValue = async (id) => {
+const deleteSensorValue = async (id) => {
     try {
         return deleteValue(id);
     } catch (error) {
@@ -49,4 +49,11 @@ export const deleteSensorValue = async (id) => {
     }
 }
 
+module.exports = {
+    createSensorValue,
+    getSensorValues,
+    getSensorValueInfo,
+    updateSensorValue,
+    deleteSensorValue
+}
 

@@ -1,8 +1,9 @@
-import { express } from "express";
-import cors from "cors";
+const express = require("express");
+const cors =  require("cors");
+const { json, urlencoded } = require("express");
 
-import { ServerRoutes } from "./routes/server-routes";
-import { UserRoutes } from "./routes/user-routes";
+const  ServerRoutes = require("./routes/server-routes");
+const  UserRoutes =  require("./routes/user-routes");
 
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
@@ -18,8 +19,8 @@ app.listen(app.get("port"), () => {
 
 
 // Middleware
-app.use(Express.json());
-app.use(Express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 //Routes
 

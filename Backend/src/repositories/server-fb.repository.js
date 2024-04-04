@@ -1,6 +1,6 @@
-import { db } from "../config/database/firebase/firebaseConfig";
+const { db } = require("../config/database/firebase/firebaseConfig");
 
-export const createRecordFB = async (value) => {
+const createRecordFB = async (value) => {
     try {
         return db.collection("users").add(value);
     } catch (error) {
@@ -8,7 +8,7 @@ export const createRecordFB = async (value) => {
     }
 }
 
-export const getValuesFB = async () => {
+const getValuesFB = async () => {
     try {
         return db.collection("users").get();
     } catch (error) {
@@ -16,7 +16,7 @@ export const getValuesFB = async () => {
     }
 }
 
-export const getValueInfoFB = async (id) => {
+const getValueInfoFB = async (id) => {
     try {
         return db.collection("users").doc(id).get();
     } catch (error) {
@@ -24,7 +24,7 @@ export const getValueInfoFB = async (id) => {
     }
 }
 
-export const updateValue = async (id, value) => {
+const updateValue = async (id, value) => {
     try {
         return db.collection("users").doc(id).update(value);
     } catch (error) {
@@ -32,10 +32,19 @@ export const updateValue = async (id, value) => {
     }
 }
 
-export const deleteValueFB = async (id) => {
+const deleteValueFB = async (id) => {
     try {
         return db.collection("users").doc(id).delete();
     } catch (error) {
         console.log(error);
     }
+}
+
+
+module.exports = {
+    createRecordFB,
+    getValueInfoFB,
+    getValuesFB,
+    updateValue,
+    deleteValueFB
 }

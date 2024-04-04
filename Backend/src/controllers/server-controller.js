@@ -1,13 +1,13 @@
-import {
+const {
     getSensorValues,
     getSensorValueInfo,
     updateSensorValue,
     deleteSensorValue,
     createSensorValue,
-} from '../services/server-service';
+} = require('../services/server-service.js');
 
 
-export const getSensor = async (req, res) => {
+const getSensor = async (req, res) => {
     try {
         const values = await getSensorValues();
         res.status(200).json(values);
@@ -16,7 +16,7 @@ export const getSensor = async (req, res) => {
     }
 }
 
-export const createSensor = async (req, res) => {
+const createSensor = async (req, res) => {
     const value = req.body;
     try {
         const newValue = await createSensorValue(value);
@@ -26,7 +26,7 @@ export const createSensor = async (req, res) => {
     }
 }
 
-export const getSensorInfo = async (req, res) => {
+const getSensorInfo = async (req, res) => {
     const { id } = req.params;
     try {
         const value = await getSensorValueInfo(id);
@@ -36,7 +36,7 @@ export const getSensorInfo = async (req, res) => {
     }
 }
 
-export const updateSensor = async (req, res) => {
+const updateSensor = async (req, res) => {
     const { id } = req.params;
     const value = req.body;
     try {
@@ -47,7 +47,7 @@ export const updateSensor = async (req, res) => {
     }
 }
 
-export const deleteSensor = async (req, res) => {
+const deleteSensor = async (req, res) => {
     const { id } = req.params;
     try {
         await deleteSensorValue(id);
@@ -55,6 +55,14 @@ export const deleteSensor = async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
+}
+
+module.exports = {
+    getSensor,
+    createSensor,
+    getSensorInfo,
+    updateSensor,
+    deleteSensor,
 }
 
 

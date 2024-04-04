@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
+
 
 const ValueSchema = new mongoose.Schema({
     value: {
@@ -11,4 +12,8 @@ const ValueSchema = new mongoose.Schema({
     },
 });
 
-export const ValuesDB = mongoose.model("Value", ValueSchema);
+const ValuesDB = mongoose.model("Value", ValueSchema);
+
+module.exports = {
+    ValuesDB
+}

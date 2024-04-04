@@ -1,14 +1,14 @@
-import { Router } from "express";
+const { Router } = require("express");
 
 const UserRoutes = Router();
 
-import {
+const {
     createUser,
     getUser,
     getUserInfo,
     updateUser,
     deleteUser,
-} from "../../controllers/user-controller";
+} = require("../../controllers/user-controller");
 
 UserRoutes.get('/user/', getUser);
 UserRoutes.post('/user/create', createUser);
@@ -16,4 +16,4 @@ UserRoutes.get('/user/:id', getUserInfo);
 UserRoutes.patch('/user/update/:id', updateUser);
 UserRoutes.delete('/user/delete/:id', deleteUser);
 
-export default UserRoutes;
+module.exports =  UserRoutes;
