@@ -1,9 +1,9 @@
 // sub.js
-import { connect } from "mqtt/*";
+var mqtt = require("mqtt");
 
 const { createSensorValue } = require('../services/server-service');
 
-const client = connect('mqtt://broker.hivemq.com');
+const client = mqtt.connect('mqtt://broker.hivemq.com');
 
 function startMQTTSubscriber() {
     client.on('connect', function () {

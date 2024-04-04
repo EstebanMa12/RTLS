@@ -1,6 +1,6 @@
-import connect from 'mqtt';
+var mqtt = require("mqtt");
 
-var client = connect.connect('mqtt://broker.hivemq.com');
+var client = mqtt.connect('mqtt://broker.hivemq.com');
 
 client.on('connect', function () {
     console.log('Connected to MQTT broker');
