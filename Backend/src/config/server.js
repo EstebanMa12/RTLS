@@ -1,6 +1,9 @@
+const { json, urlencoded } = require("express");
 const express = require("express");
 const cors =  require("cors");
-const { json, urlencoded } = require("express");
+
+// MONGO
+const mongoDB = require("./database/mongo/mongoConfig")
 
 const  ServerRoutes = require("./routes/server-routes");
 const  UserRoutes =  require("./routes/user-routes");
@@ -14,9 +17,10 @@ if (process.env.NODE_ENV !== "production") {
 
 const app = express();
 app.use(cors());
+mongoDB.connect();
 
 app.set("port", process.env.PORT || 3000);
-app.listen(app.get("port"), () => {
+app.listen(app.get("port"), async () => {
     console.log(`Server is running on port ${app.get("port")}`);
     startMQTTPublisher();
     startMQTTSubscriber()
@@ -25,7 +29,7 @@ app.listen(app.get("port"), () => {
 
 // Middleware
 app.use(json());
-app.use(urlencoded({ extended: true }));
+app.use(urlencoded({ extended: false }));
 
 //Routes
 app.get("/", (req, res)=>{

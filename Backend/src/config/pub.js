@@ -7,8 +7,9 @@ function startMQTTPublisher(){
     client.on('connect', function () {
         console.log('Connected to MQTT broker');
         setInterval(() => {
-            client.publish('sensor', JSON.stringify({ value: Math.random() }));
-        }, 300);
+            let value = Math.random();
+            client.publish('sensor', JSON.stringify({ value: value }));
+        }, 500);
     })
 
 }
