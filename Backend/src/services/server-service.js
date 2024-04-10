@@ -1,9 +1,12 @@
 const { 
     createRecord, 
-    getValueInfo, 
     getValues, 
     updateValue,
-    deleteValue
+    deleteValue,
+    getValuesByDate,
+    getValuesByHour,
+    getValuesByHourRange,
+    getValuesByDateRange
 } = require("../repositories/server-mongo.repository");
 
 
@@ -25,13 +28,6 @@ const getSensorValues = async () => {
     }
 }
 
-const getSensorValueInfo = async (id) => {
-    try {
-        return getValueInfo(id);
-    } catch (error) {
-        console.log(error);
-    }
-}
 
 const updateSensorValue = async (id, value) => {
     try {
@@ -49,11 +45,46 @@ const deleteSensorValue = async (id) => {
     }
 }
 
+const getSensorValueByDate = async (date) =>{
+    try{
+        return getValuesByDate(date)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+const getSensorValueByHour = async (hour) =>{
+    try{
+        return getValuesByHour(hour)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+const getSensorValueByHourRange = async (startHour, endHour) =>{
+    try{
+        return getValuesByHourRange(startHour, endHour)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+const getSensorValueByDateRange = async (startDate, endDate) =>{
+    try{
+        return getValuesByDateRange(startDate, endDate)
+    }catch(error){
+        console.log(error)
+    }
+}
+
 module.exports = {
     createSensorValue,
     getSensorValues,
-    getSensorValueInfo,
     updateSensorValue,
-    deleteSensorValue
+    deleteSensorValue,
+    getSensorValueByDate,
+    getSensorValueByHour,
+    getSensorValueByHourRange,
+    getSensorValueByDateRange
 }
 
