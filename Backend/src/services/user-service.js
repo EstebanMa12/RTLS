@@ -8,7 +8,8 @@ const {
 } = require("../repositories/server-fb.repository");
 
 
-const {auth} = require("../config/database/firebase/firebaseConfig");
+
+const {auth, admin} = require("../config/database/firebase/firebaseConfig");
 
 // The firebase database will be used to manage the users in the web app 
 
@@ -21,17 +22,16 @@ const createUser = async (userData) => {
             displayName: userData.name,
             disabled: false
         });
-        console.log('Successfully created new user:', userRecord.toJSON());
-        
+        const accessToken = await auth.createCustomToken(userRecord.uid);
         const userDoc = await createUserInCollection(userRecord.uid, {
             name: userData.name,
             email: userData.email,
-            accessToken: userRecord.accessToken
+            accessToken: accessToken
         });
         return {
             uid: userRecord.uid,
             name: userData.name,
-            accessToken: userRecord.accessToken
+            accessToken: userDoc.accessToken
         };
 
 
@@ -50,6 +50,7 @@ const getUserInfo = async (email) => {
 }
 
 const updateUser = async (email, userData) => {
+    await auth.updateUser(email, userData);
     return await updateUserInCollection(email, userData);
 }
 
@@ -59,7 +60,7 @@ const deleteUser = async (email) => {
 
 const loginWithEmailAndPassword = async (email, password) => {
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await admin.auth().signInWithEmailAndPassword(email, password);
         return await loginFromFirestore({
             uid: userCredential.user.uid,
             name: userCredential.user.displayName,

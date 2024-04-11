@@ -9,8 +9,8 @@ const {
 } = require('../services/user-service');
 
 const register = async (req, res) => {
-    const { email, password, name } = req.body;
-    const user = await createUser(email, password, name);
+    const userData = req.body;
+    const user = await createUser(userData);
     if (user) {
         res.status(201).json(user);
     } else {

@@ -1,4 +1,4 @@
-const { db } = require("../config/database/firebase/firebaseConfig");
+const { db, auth } = require("../config/database/firebase/firebaseConfig");
 
 const collectionName = "users";
 
@@ -18,15 +18,15 @@ const createUserInCollection = async (uid, data) => {
 
 const getUserFromCollection = async (uid) => {
     try {
-        const docRef = doc(db, collectionName, uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
+        const docRef = db.collection(collectionName).doc(uid);
+        const doc = await docRef.get();
+        if (doc.exists()) {
             return {
-                id: docSnap.id,
-                ...docSnap.data()
+                id: doc.id,
+                ...doc.data()
             };
         } else {
-            return false;
+            return null;
         }
     } catch (error) {
         console.log(error);
@@ -58,9 +58,8 @@ const loginFromFirestore = async (userData) => {
 
 const getEmailsFromFirestore = async () => {
     try {
-        const querySnapshot = await getDocs(collection(db, collectionName));
-        const emails = querySnapshot.docs.map((doc) => doc.data().email);
-        return emails;
+        const querySnapshot = await db.collection(collectionName).get();
+        return querySnapshot.docs.map((doc) => doc.data().email);
     } catch (error) {
         console.warn(error);
         return false;
@@ -69,7 +68,7 @@ const getEmailsFromFirestore = async () => {
 
 const getUserByEmailFromFirestore = async (email) => {
     try {
-        const querySnapshot = await getDocs(collection(db, collectionName));
+        const querySnapshot = await db.collection(collectionName).get();
         const user = querySnapshot.docs.find((doc) => doc.data().email === email);
         if (user) {
             return {
@@ -87,8 +86,8 @@ const getUserByEmailFromFirestore = async (email) => {
 
 const updateUserInCollection = async (uid, data) => {
     try {
-        const docRef = doc(db, collectionName, uid);
-        await setDoc(docRef, data, { merge: true });
+        const docRef = db.collection(collectionName).doc(uid);
+        await docRef.set(data, { merge: true });
         return {
             id: docRef.id,
             ...data
@@ -99,11 +98,23 @@ const updateUserInCollection = async (uid, data) => {
     }
 }
 
-const deleteUserFromCollection = async (uid) => {
+const deleteUserFromCollection = async (email) => {
     try {
-        const docRef = doc(db, collectionName, uid);
-        await setDoc(docRef, { active: false }, { merge: true });
-        return true;
+        // Realiza una consulta para encontrar el documento con el correo electrónico especificado
+        const querySnapshot = await db.collection(collectionName).where('email', '==', email).get();
+        
+        // Verifica si se encontró el documento
+        if (!querySnapshot.empty) {
+            // Obtiene el primer documento que coincide con el correo electrónico
+            const docRef = querySnapshot.docs[0].ref;
+            // Elimina el documento
+            await docRef.delete();
+            await auth.deleteUser(docRef.id);
+            return true;
+        } else {
+            console.log('No se encontró el usuario con el correo electrónico proporcionado.');
+            return false;
+        }
     } catch (error) {
         console.log(error);
         return false;

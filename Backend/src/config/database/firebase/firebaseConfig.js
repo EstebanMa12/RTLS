@@ -16,7 +16,8 @@ const db = getFirestore(app);
 
 module.exports = {
   db,
-  auth
+  auth,
+  admin
 }
 
 // const firebaseConfig = {
