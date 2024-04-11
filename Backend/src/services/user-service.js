@@ -1,50 +1,83 @@
 const {
-    createRecordFB,
-    getValueInfoFB,
-    getValuesFB,
-    updateValueFB,
-    deleteValueFB
+    createUserInCollection,
+    loginFromFirestore,
+    getEmailsFromFirestore,
+    getUserByEmailFromFirestore,
+    updateUserInCollection,
+    deleteUserFromCollection
 } = require("../repositories/server-fb.repository");
+
+
+const {auth} = require("../config/database/firebase/firebaseConfig");
 
 // The firebase database will be used to manage the users in the web app 
 
-const createUser = async (value) => {
+const createUser = async (userData) => {
     try {
-        return createRecordFB(value);
+        const userRecord = await auth.createUser({
+            email: userData.email,
+            emailVerified: false,
+            password: userData.password,
+            displayName: userData.name,
+            disabled: false
+        });
+        console.log('Successfully created new user:', userRecord.toJSON());
+        
+        const userDoc = await createUserInCollection(userRecord.uid, {
+            name: userData.name,
+            email: userData.email,
+            accessToken: userRecord.accessToken
+        });
+        return {
+            uid: userRecord.uid,
+            name: userData.name,
+            accessToken: userRecord.accessToken
+        };
+
+
     } catch (error) {
         console.log(error);
+        return false;
     }
 }
 
 const getUsers = async () => {
+    return await getEmailsFromFirestore();
+}
+
+const getUserInfo = async (email) => {
+    return await getUserByEmailFromFirestore(email);
+}
+
+const updateUser = async (email, userData) => {
+    return await updateUserInCollection(email, userData);
+}
+
+const deleteUser = async (email) => {
+    return await deleteUserFromCollection(email);
+}
+
+const loginWithEmailAndPassword = async (email, password) => {
     try {
-        return getValuesFB();
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        return await loginFromFirestore({
+            uid: userCredential.user.uid,
+            name: userCredential.user.displayName,
+            accessToken: userCredential.user.accessToken
+        });
     } catch (error) {
         console.log(error);
+        return false;
     }
 }
 
-const getUserInfo = async (id) => {
+const logout = async () => {
     try {
-        return getValueInfoFB(id);
+        await signOut(auth);
+        return true;
     } catch (error) {
         console.log(error);
-    }
-}
-
-const updateUser = async (id, value) => {
-    try {
-        return updateValueFB(id, value);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-const deleteUser = async (id) => {
-    try {
-        return deleteValueFB(id);
-    } catch (error) {
-        console.log(error);
+        return false;
     }
 }
 
@@ -53,5 +86,7 @@ module.exports = {
     getUsers,
     getUserInfo,
     updateUser,
-    deleteUser
+    deleteUser,
+    loginWithEmailAndPassword,
+    logout
 }
