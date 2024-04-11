@@ -49,9 +49,17 @@ const getUserInfo = async (email) => {
     return await getUserByEmailFromFirestore(email);
 }
 
-const updateUser = async (email, userData) => {
-    await auth.updateUser(email, userData);
-    return await updateUserInCollection(email, userData);
+const updateUser = async (uid, userData) => {
+    try {
+        // Actualizar los datos del usuario en la autenticación
+        await auth.updateUser(uid, userData);
+
+        // Actualizar los datos del usuario en la colección Firestore u otros servicios
+        return await updateUserInCollection(uid, userData);
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
 }
 
 const deleteUser = async (email) => {

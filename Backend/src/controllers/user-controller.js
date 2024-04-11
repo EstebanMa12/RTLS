@@ -59,7 +59,8 @@ const getUserController = async (req, res) => {
 const updateUserController = async (req, res) => {
     const { email } = req.params;
     const userData = req.body;
-    const user = await updateUser(email, userData);
+    const docRef = await getUserInfo(email);
+    const user = await updateUser(docRef.id, userData);
     if (user) {
         res.status(200).json(user);
     } else {
