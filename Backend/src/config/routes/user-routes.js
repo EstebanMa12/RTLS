@@ -17,7 +17,9 @@ UserRoutes.get("/user/:email", getUserController);
 UserRoutes.put("/user/:email", updateUserController);
 UserRoutes.delete("/user/:email", deleteUserController);
 UserRoutes.post("/register", register);
-UserRoutes.post("/login", login);
-UserRoutes.post("/logout", logoutController);
+
+// Estas rutas aún quedan en versión experimental, ya que como se esta utilizando firebase del lado del servidor, aun no encuentro la forma para poder hacer un login y logout de manera correcta
+// UserRoutes.post("/login", login);
+// UserRoutes.post("/logout", logoutController);
 
 module.exports =  UserRoutes;
