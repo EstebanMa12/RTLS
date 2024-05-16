@@ -20,9 +20,9 @@ const getSensor = async (req, res) => {
 }
 
 const createSensor = async (req, res) => {
-    const value = req.body;
+    const {value, state} = req.body;
     try {
-        const newValue = await createSensorValue(value);
+        const newValue = await createSensorValue(value, state);
         res.status(201).json(newValue);
     } catch (error) {
         res.status(409).json({ message: error.message });
