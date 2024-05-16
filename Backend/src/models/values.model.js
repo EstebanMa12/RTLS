@@ -15,8 +15,24 @@ const ValueSchema = new mongoose.Schema({
     collection:'Values'
 });
 
+const ButtonSchema = new mongoose.Schema({
+    state: {
+        type: Boolean,
+        default: false,
+        required: true,
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+},{
+    collection:'Button'
+});
+
 const ValuesDB = mongoose.model("Value", ValueSchema);
+const ButtonDB = mongoose.model("Button", ButtonSchema);
 
 module.exports = {
-    ValuesDB
+    ValuesDB,
+    ButtonDB
 }

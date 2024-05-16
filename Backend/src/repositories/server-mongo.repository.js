@@ -1,5 +1,6 @@
 
-const { ValuesDB } = require("../models/values.model");
+const { ValuesDB, ButtonDB } = require("../models/values.model");
+
 
 const getValues = async () => {
     try {
@@ -107,8 +108,9 @@ const getValuesByDateRange = async (startDate, endDate) => {
     }
 }
 
-const createRecord = async (value) => {
+const createRecord = async (value, state) => {
     try {
+        ButtonDB.create(state);
         return ValuesDB.create(value);
     }catch (error){
         console.log(error)

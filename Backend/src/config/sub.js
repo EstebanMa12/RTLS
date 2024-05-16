@@ -7,7 +7,7 @@ const client = mqtt.connect('mqtt://broker.hivemq.com');
 
 function startMQTTSubscriber() {
     client.on('connect', function () {
-        client.subscribe('sensor', function (err) {
+        client.subscribe('esteban/PIR/', function (err) {
             if (!err) {
                 console.log('Successfully subscribed to sensor topic');
             }
