@@ -22,7 +22,6 @@ mongoDB.connect();
 app.set("port", process.env.PORT || 3000);
 app.listen(app.get("port"), async () => {
     console.log(`Server is running on port ${app.get("port")}`);
-    // startMQTTPublisher();
     startMQTTSubscriber()
 });
 
