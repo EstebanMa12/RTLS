@@ -9,7 +9,6 @@ const  ServerRoutes = require("./routes/server-routes");
 const  UserRoutes =  require("./routes/user-routes");
 
 const { startMQTTSubscriber } = require("./sub");
-const { startMQTTPublisher } = require("./pub");
 
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();

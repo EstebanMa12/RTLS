@@ -2,6 +2,7 @@
 import Header from "../../components/Header";
 import ImageWithCaption from "../../components/ImageWithCaption";
 import Plot from "react-plotly.js";
+import { Button } from "@/components/ui/button";
 const Home = () => {
   return (
     <div className="p-6 ">
@@ -30,6 +31,9 @@ const Home = () => {
       }
       layout={{width: 900, height: 240, title: 'A Fancy Plot'}}
       />
+      <div className="flex justify-center mt-8">
+        <Button>Botón</Button>
+      </div>
       <footer className="bg-gray-800 text-white p-4 mt-8">
         <p className="text-center">
           &copy; 2024 Proyecto SMTR - Todos los derechos reservados
