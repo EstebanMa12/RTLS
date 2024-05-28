@@ -176,6 +176,26 @@ const deleteButton = async (id) => {
     }
 }
 
+const sensorValues = async (page, pageSize) => {
+    try {
+        return page && pageSize ? SensorDB.find().skip((page - 1) * pageSize).limit(pageSize) : SensorDB.find();
+    }
+    catch (error) {
+        console.error('Error: ', error);
+        throw error;
+    }
+}
+
+const buttonValues = async (page, pageSize) => {
+    try {
+        return page && pageSize ? ButtonDB.find().skip((page - 1) * pageSize).limit(pageSize) : ButtonDB.find();
+    }
+    catch (error) {
+        console.error('Error: ', error);
+        throw error;
+    }
+}
+
 module.exports = {
     createRecord,
     updateValue,
@@ -186,7 +206,9 @@ module.exports = {
     checkForAlerts,
     getLastValues,
     updateButton,
-    deleteButton
+    deleteButton,
+    sensorValues,
+    buttonValues
 }
 
 

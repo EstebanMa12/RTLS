@@ -8,7 +8,9 @@ const {
     checkForSensorAlerts,
     getLastSensorValues,
     updateSensorButton,
-    deleteSensorButton
+    deleteSensorButton,
+    getSensorValues,
+    getButtonValues
 } = require('../services/server-service.js');
 
 
@@ -117,6 +119,28 @@ const alerts = async (req, res) => {
 
 
 
+const sensorValues = async (req, res) => {
+    try {
+        const page = req.query.page ? parseInt(req.query.page) : null;
+        const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : null;
+        const values = await getSensorValues(page, pageSize);
+        res.status(200).json(values);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+const buttonValues = async (req, res) => {
+    try {
+        const page = req.query.page ? parseInt(req.query.page) : null;
+        const pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : null;
+        const values = await getButtonValues(page, pageSize);
+        res.status(200).json(values);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 
 
@@ -130,7 +154,9 @@ module.exports = {
     stats,
     alerts,
     updateButton,
-    deleteButton
+    deleteButton,
+    sensorValues,
+    buttonValues
 
 }
 

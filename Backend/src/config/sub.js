@@ -20,7 +20,8 @@ function startMQTTSubscriber() {
         try {
             await createSensorValue(data);
         } catch (error) {
-            console.log('Error saving data:', error);
+            console.error('Error saving data:', error);
+            throw error;
         }
     });
 }

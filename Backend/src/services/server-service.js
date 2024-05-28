@@ -8,7 +8,9 @@ const {
     checkForAlerts,
     getLastValues,
     updateButton,
-    deleteButton
+    deleteButton,
+    buttonValues,
+    sensorValues
 } = require("../repositories/server-mongo.repository");
 
 
@@ -95,6 +97,22 @@ const deleteSensorButton = async (id) => {
     }
 }
 
+const getSensorValues = async (page, pageSize) => {
+    try {
+        return sensorValues(page, pageSize)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const getButtonValues = async (page, pageSize) => {
+    try {
+        return buttonValues(page, pageSize)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     createSensorValue,
     updateSensorValue,
@@ -105,6 +123,8 @@ module.exports = {
     checkForSensorAlerts,
     getLastSensorValues,
     updateSensorButton,
-    deleteSensorButton
+    deleteSensorButton,
+    getSensorValues,
+    getButtonValues
 }
 
