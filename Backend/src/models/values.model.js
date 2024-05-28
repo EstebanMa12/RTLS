@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 
 const ValueSchema = new mongoose.Schema({
-    value: {
-        type: Number,
-        default: 0,
+    movement: {
+        type: Boolean,
+        default: false,
         required: true,
     },
     date: {
@@ -12,7 +12,7 @@ const ValueSchema = new mongoose.Schema({
         default: Date.now,
     },
 },{
-    collection:'Values'
+    collection:'Sensor'
 });
 
 const ButtonSchema = new mongoose.Schema({
@@ -29,10 +29,10 @@ const ButtonSchema = new mongoose.Schema({
     collection:'Button'
 });
 
-const ValuesDB = mongoose.model("Value", ValueSchema);
+const SensorDB = mongoose.model("Sensor", ValueSchema);
 const ButtonDB = mongoose.model("Button", ButtonSchema);
 
 module.exports = {
-    ValuesDB,
+    SensorDB,
     ButtonDB
 }

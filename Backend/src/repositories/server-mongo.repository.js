@@ -1,5 +1,5 @@
 
-const { ValuesDB, ButtonDB } = require("../models/values.model");
+const { SensorDB, ButtonDB } = require("../models/values.model");
 
 
 const getValues = async () => {
@@ -108,12 +108,18 @@ const getValuesByDateRange = async (startDate, endDate) => {
     }
 }
 
-const createRecord = async (value, state) => {
+const createRecord = async (data) => {
     try {
-        ButtonDB.create(state);
-        return ValuesDB.create(value);
+        const { movementState, buttonState } = data;
+        const movementEntry = new SensorDB({ movement: movementState });
+        const stateEntry = new ButtonDB({ state:buttonState });
+
+        await movementEntry.save();
+        await stateEntry.save();
+        return { movementEntry, stateEntry };
     }catch (error){
-        console.log(error)
+        console.error('Error: ', error);
+        throw error;
     }
 }
 

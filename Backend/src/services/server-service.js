@@ -12,9 +12,9 @@ const {
 
 
 // The mongo database will be used by the sensor and MQTT protocol
-const createSensorValue = async (value, state) => {
+const createSensorValue = async (data) => {
     try {
-        return createRecord(value, state);
+        return createRecord(data);
     } catch (error) {
         console.log(error);
     }

@@ -20,16 +20,19 @@ const getSensor = async (req, res) => {
 }
 
 const createSensor = async (req, res) => {
-    const {value, state} = req.body;
     try {
-        const newValue = await createSensorValue(value, state);
-        res.status(201).json(newValue);
+        const data = req.body;
+        const newValue = await createSensorValue(data);
+        res.status(201).json({
+                message: 'Values created successfully in the documents',
+                data: newValue
+            });
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
 }
 
-const getSensorByDate = async (req, res) =>{
+const getSensorByDate = async (req, res) => {
 
     const { date } = req.params;
     try {
@@ -40,7 +43,7 @@ const getSensorByDate = async (req, res) =>{
     }
 }
 
-const getSensorByHour = async (req, res) =>{
+const getSensorByHour = async (req, res) => {
     const { hour } = req.params;
     try {
         const values = await getSensorValueByHour(hour);
@@ -50,7 +53,7 @@ const getSensorByHour = async (req, res) =>{
     }
 }
 
-const getSensorByHourRange = async (req, res) =>{
+const getSensorByHourRange = async (req, res) => {
     const { startHour, endHour } = req.params;
     try {
         const values = await getSensorValueByHourRange(startHour, endHour);
@@ -60,7 +63,7 @@ const getSensorByHourRange = async (req, res) =>{
     }
 }
 
-const getSensorByDateRange = async (req, res) =>{
+const getSensorByDateRange = async (req, res) => {
     const { startDate, endDate } = req.params;
     try {
         const values = await getSensorValueByDateRange(startDate, endDate);
