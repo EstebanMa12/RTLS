@@ -178,7 +178,6 @@ const deleteButton = async (id) => {
 
 module.exports = {
     createRecord,
-    getValues,
     updateValue,
     deleteValue,
     getValuesByDate,

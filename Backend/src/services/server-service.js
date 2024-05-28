@@ -1,12 +1,14 @@
-const { 
-    createRecord, 
-    getValues, 
+const {
+    createRecord,
     updateValue,
     deleteValue,
     getValuesByDate,
-    getValuesByHour,
-    getValuesByHourRange,
-    getValuesByDateRange
+    calculateUsageStatistics,
+    generateUsageReport,
+    checkForAlerts,
+    getLastValues,
+    updateButton,
+    deleteButton
 } = require("../repositories/server-mongo.repository");
 
 
@@ -15,14 +17,6 @@ const {
 const createSensorValue = async (data) => {
     try {
         return createRecord(data);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-const getSensorValues = async () => {
-    try {
-        return getValues();
     } catch (error) {
         console.log(error);
     }
@@ -45,46 +39,72 @@ const deleteSensorValue = async (id) => {
     }
 }
 
-const getSensorValueByDate = async (date) =>{
-    try{
+const getSensorValueByDate = async (date) => {
+    try {
         return getValuesByDate(date)
-    }catch(error){
+    } catch (error) {
         console.log(error)
     }
 }
 
-const getSensorValueByHour = async (hour) =>{
-    try{
-        return getValuesByHour(hour)
-    }catch(error){
+const calculateSensorStatistics = async (startDate, endDate) => {
+    try {
+        return calculateUsageStatistics(startDate, endDate)
+    } catch (error) {
         console.log(error)
     }
 }
 
-const getSensorValueByHourRange = async (startHour, endHour) =>{
-    try{
-        return getValuesByHourRange(startHour, endHour)
-    }catch(error){
+const generateSensorReport = async (startDate, endDate) => {
+    try {
+        return generateUsageReport(startDate, endDate)
+    } catch (error) {
         console.log(error)
     }
 }
 
-const getSensorValueByDateRange = async (startDate, endDate) =>{
-    try{
-        return getValuesByDateRange(startDate, endDate)
-    }catch(error){
+const checkForSensorAlerts = async () => {
+    try {
+        return checkForAlerts()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const getLastSensorValues = async () => {
+    try {
+        return getLastValues()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const updateSensorButton = async (id, value) => {
+    try {
+        return updateButton(id, value)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const deleteSensorButton = async (id) => {
+    try {
+        return deleteButton(id)
+    } catch (error) {
         console.log(error)
     }
 }
 
 module.exports = {
     createSensorValue,
-    getSensorValues,
     updateSensorValue,
     deleteSensorValue,
     getSensorValueByDate,
-    getSensorValueByHour,
-    getSensorValueByHourRange,
-    getSensorValueByDateRange
+    calculateSensorStatistics,
+    generateSensorReport,
+    checkForSensorAlerts,
+    getLastSensorValues,
+    updateSensorButton,
+    deleteSensorButton
 }
 
