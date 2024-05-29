@@ -2,6 +2,7 @@
 import HistoricData from "@/components/HistoricData";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "../../components/Header";
 const ButtonPage = () => {
   const options = {
     responsive: true,
@@ -69,7 +70,18 @@ const ButtonPage = () => {
   };
   return (
     <>
-      <HistoricData chartData={chartData} options={options} page={page} setPage={setPage}/>
+      <div className="p-6">
+        <Header
+          title="Datos historicos del botón"
+          subtitle="A continuación se muestra la información histórica del botón"
+        />
+      </div>
+      <HistoricData
+        chartData={chartData}
+        options={options}
+        page={page}
+        setPage={setPage}
+      />
     </>
   );
 };

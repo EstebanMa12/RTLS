@@ -43,7 +43,7 @@ const HistoricData = ({ chartData, options, page, setPage }) => {
     p-4
     shadow-md
     rounded-md
-    md:h-5/6
+    md:h-3/5
     "
     >
       <Line data={chartData} options={options} />

@@ -3,7 +3,7 @@ import HistoricData from "@/components/HistoricData";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
+import Header from "../../components/Header";
 
 const Sensor = () => {
   const options = {
@@ -18,15 +18,14 @@ const Sensor = () => {
         text: "Historic Data Sensor",
       },
     },
-    layout:{
-        padding:20
+    layout: {
+      padding: 20,
     },
-    scale:{
-        y:{
-            beginAtZero:true
-        }
-
-    }
+    scale: {
+      y: {
+        beginAtZero: true,
+      },
+    },
   };
   const [activeTimeData, setActiveTimeData] = useState([]);
   const [inactiveTimeData, setInactiveTimeData] = useState([]);
@@ -74,7 +73,7 @@ const Sensor = () => {
       {
         label: "Inactive Time (minutes)",
         data: inactiveTimeData,
-        
+
         borderColor: "rgb(255, 99, 132)",
         tension: 0.1,
       },
@@ -82,7 +81,18 @@ const Sensor = () => {
   };
   return (
     <>
-      <HistoricData chartData={chartData} options={options} page={page} setPage={setPage}/>
+        <div className="p-6">
+          <Header
+            title="Datos historicos del sensor de movimiento"
+            subtitle="A continuación se muestra la información histórica del sensor de movimiento."
+          />
+        </div>
+      <HistoricData
+        chartData={chartData}
+        options={options}
+        page={page}
+        setPage={setPage}
+      />
     </>
   );
 };
