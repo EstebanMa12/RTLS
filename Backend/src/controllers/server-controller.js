@@ -11,7 +11,7 @@ const {
     deleteSensorButton,
     getSensorValues,
     getButtonValues,
-    generateCompleteUsageReport
+    generateCompleteSensorReport
 } = require('../services/server-service.js');
 
 
@@ -141,9 +141,9 @@ const buttonValues = async (req, res) => {
 }
 
 const completeReport = async (req, res) => {
-    const { startDate, endDate } = req.params;
+    const { date } = req.params;
     try {
-        const report = await generateCompleteUsageReport(startDate, endDate);
+        const report = await generateCompleteSensorReport(date);
         res.status(200).json(report);
     } catch (error) {
         res.status(500).json({ message: error.message });

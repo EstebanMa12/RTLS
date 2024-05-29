@@ -114,9 +114,9 @@ const getButtonValues = async (page, pageSize) => {
     }
 }
 
-const generateCompleteSensorReport = async (startDate, endDate) => {
+const generateCompleteSensorReport = async (date) => {
     try {
-        return generateCompleteUsageReport(startDate, endDate)
+        return generateCompleteUsageReport(date)
     } catch (error) {
         console.log(error)
     }

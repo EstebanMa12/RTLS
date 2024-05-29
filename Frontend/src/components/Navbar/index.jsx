@@ -14,7 +14,7 @@ const Navbar = () => {
             px-10
             ">
             <Link to="/">
-                <h1 className="text-3xl font-bold hover:text-orange-500"> SISTEMA RTLS</h1>
+                <h1 className="text-3xl font-bold hover:text-orange-500"> SISTEMA TLS</h1>
             </Link>
             </nav>
         </div>
