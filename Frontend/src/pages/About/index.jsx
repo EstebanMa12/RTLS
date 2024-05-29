@@ -89,16 +89,15 @@ const About = () => {
             src="https://tediselmedical.com/wp-content/uploads/2023/11/hospitales_inteligentes_pic01_20231102_tedisel_medical-1440x960.jpg"
             alt="RTLS"
           />
-          <p className="text-gray-700 mb-2">
-            La implementación de estos sistemas, respaldada por TICs y el IoT,
-            no solo garantiza la integridad de los datos sino que también
-            potencia la seguridad y efectividad en la atención médica. La
-            capacidad de monitorear y rastrear constantemente los inventarios
-            contribuye significativamente a prevenir situaciones críticas, como
-            la escasez de suministros médicos. Esta anticipación y respuesta
-            proactiva evitan posibles impactos negativos en la salud de los
-            pacientes, asegurando la disponibilidad oportuna de los recursos
-            necesarios para la atención médica.
+          <p className="text-gray-700 mb-2 ">
+            <h2 className="text-2xl font-semibold mb-4 col-span-3 text-left">
+              Nuestra tecnología
+            </h2>
+            Nuestra plataforma utiliza una combinación de sensores de movimiento
+            para monitorizar el flujo de personas dentro del quirófano. Estos
+            datos se integran con los sistemas de gestión hospitalaria
+            existentes y se analizan para identificar patrones de uso y
+            oportunidades de mejora.
           </p>
           <div className="flex  col-span-2">
             <ImageWithCaption
@@ -108,20 +107,20 @@ const About = () => {
           </div>
         </section>
         <section className="bg-white p-6 rounded-lg shadow-md mt-4">
-          <h2 className="text-2xl font-semibold mb-4">RTLS</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            Compromiso con la Privacidad y la Seguridad
+          </h2>
           <p className="text-gray-700">
-            Los Sistemas de Localización en Tiempo Real (RTLS) son tecnologías
-            que permiten el seguimiento de activos, personas y objetos en tiempo
-            real. Estos sistemas se componen de hardware, software y servicios
-            que permiten la localización y seguimiento de activos en tiempo
-            real.
+            Entendemos la importancia de la privacidad y la seguridad en el
+            ámbito de la salud. Por ello, garantizamos que todos los datos
+            recolectados son manejados conforme a las normativas de protección
+            de datos, asegurando la confidencialidad y seguridad de la
+            información.
           </p>
           <p className="text-gray-700 mt-2">
-            Los RTLS utilizan diferentes tecnologías para su funcionamiento,
-            entre las que se encuentran el GPS, RFID, Bluetooth, Wi-Fi, UWB,
-            entre otras. Estas tecnologías permiten la localización de activos
-            en tiempo real con una precisión que puede llegar a ser de
-            centímetros.
+            Nuestra plataforma cumple con los más altos estándares de seguridad
+            y encriptación, garantizando que los datos de los pacientes y el
+            personal médico estén protegidos en todo momento.
           </p>
           <ImageWithCaption
             src="https://i.gifer.com/MqyW.gif"
@@ -129,76 +128,13 @@ const About = () => {
           />
         </section>
         <section className="bg-white p-6 rounded-lg shadow-md mt-4">
-          <h2 className="text-2xl font-semibold mb-4">Objetivo</h2>
+          <h2 className="text-2xl font-semibold mb-4">Únete a Nosotros</h2>
           <p className="text-gray-700 mb-2">
-            Mediante el desarrollo de este proyecto, se busca implementar un
-            Sistema de Monitoreo de In-ventario en Tiempo Real (SMTR) respaldado
-            por Tecnologías de la Información y Comunicación(TICs) y el Internet
-            de las Cosas (IoT) en el ámbito hospitalario.
-          </p>
-          <h2 className="text-xl font-semibold mb-3">Objetivos especificos</h2>
-          <ul className="text-gray-700 list-disc list-inside">
-            <li>
-              Diseñar e implementar un sistema informático que permita la
-              automatización del registro y seguimiento de inventarios y equipos
-              médicos en tiempo real.
-            </li>
-            <li>
-              Incorporar tecnologías IoT, para facilitar la captura, transmisión
-              y almacenamiento de datos relacionados con la ubicación y estado
-              de los equipos médicos de manera eficiente y segura.
-            </li>
-            <li>
-              Diseñar y implementar un aplicativo web con una interfaz intuitiva
-              que permita a los usuarios, especialmente al personal médico y
-              administrativo, monitorear y gestionar el inventario de manera
-              sencilla y efectiva.
-            </li>
-            <li>
-              Configurar la comunicación en tiempo real entre el sistema
-              implementado y los dispositivos médicos conectados, garantizando
-              la actualización inmediata de la información sobre el estado y
-              ubicación de los equipos
-            </li>
-          </ul>
-        </section>
-
-        {/* <ImageWithCaption
-                    src= "https://www.mokosmart.com/wp-content/uploads/2021/08/What-is-an-RTLS.webp"
-                    alt = "RTLS"
-                /> */}
-
-        <section className="bg-white p-6 rounded-lg shadow-md mt-4">
-          <h2 className="text-2xl font-semibold mb-4">Antecedentes</h2>
-          <p className="text-gray-700 ">
-            En el ámbito hospitalario, la gestión de inventarios ha enfrentado
-            desafíos con procesos manuales y sistemas tradicionales. La adopción
-            de tecnologías como el Internet de las Cosas (IoT) y las Tecnologías
-            de la Información y Comunicación (TICs) ha mostrado prometedores
-            resultados.
-          </p>
-
-          <h2 className="text-2xl font-semibold my-4">
-            Implementaciones Previas
-          </h2>
-          <p className="text-gray-700">
-            En estudios como el de María, se evaluó la eficiencia de un sistema
-            de tracking de pacientes quirúrgicos en el Hospital Val
-            d&apos;Hebron. Resultados revelaron mejoras significativas en el
-            número de procedimientos realizados y reducción de tiempos.
-          </p>
-          <p className="text-gray-700 mt-2">
-            Juan Diego Calle abordó la necesidad de seguimiento de pacientes en
-            hospitales mediante un sistema de identificación y seguimiento con
-            tecnología RFID, presentando beneficios aunque identificando retos
-            como interferencias y deterioro de etiquetas RFID.
-          </p>
-          <p className="text-gray-700 mt-2">
-            Cynthia Villalba propuso el uso de RFID en un contexto de Monitoreo
-            de Inventario en Tiempo Real (SMTR) en el &quot;Hospital de
-            Clínicas&quot; en Paraguay, demostrando el potencial de la
-            implementación de tecnologías avanzadas para mejorar la eficiencia y
-            gestión.
+            Estamos comprometidos con la innovación continua y la mejora de la
+            atención médica. Si compartes nuestra visión y quieres ser parte de
+            esta transformación en la gestión hospitalaria, te invitamos a
+            unirte a nosotros como cliente, colaborador o parte de nuestro
+            equipo.
           </p>
         </section>
       </main>
