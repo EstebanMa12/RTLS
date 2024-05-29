@@ -39,35 +39,51 @@ const About = () => {
             alt="RTLS"
           />
           <p className="text-gray-700 flex items-center col-span-2">
-            En este orden de ideas, la gestión de inventarios en hospitales
-            representa un desafío mayor a las aplicaciones en otras industrias
-            debido a la importancia de evitar faltantes en el inventario que
-            puede afectar la salud de los pacientes al no contar los recursos
-            requeridos para un apropiado tratamiento y/o intervención, lo que
-            hace necesario el desarrollo de herramientas que faciliten un manejo
-            efectivo de las existencias para este tipo de instituciones
+            Nuestro equipo está comprometido con la innovación y la excelencia,
+            trabajando en colaboración con hospitales y centros de salud para
+            implementar soluciones personalizadas que se adapten a sus
+            necesidades específicas. Creemos que la tecnología puede ser una
+            herramienta poderosa para mejorar la atención médica y estamos
+            comprometidos a hacer una diferencia positiva en la vida de los
+            pacientes y el personal médico.
           </p>
         </section>
 
         {/* planteamiento del problema */}
         <section className="bg-white p-6 rounded-lg shadow-md mt-4 grid grid-cols-3">
           <h2 className="text-2xl font-semibold mb-4 col-span-3">
-            Justificación
+            ¿Quiénes Somos?
           </h2>
           <p className="text-gray-700 mb-2 col-span-3">
-            La gestión de inventarios en hospitales es un proceso crítico que
-            requiere de una atención especial debido a la importancia de contar
-            con los recursos necesarios para garantizar la atención de los
-            pacientes.
+            Somos un equipo multidisciplinario de profesionales apasionados por
+            la salud y la tecnología. Con experiencia en ingeniería biomédica,
+            análisis de datos, y gestión hospitalaria, nos dedicamos a
+            desarrollar soluciones que aborden los desafíos críticos en la
+            operación de los quirófanos.
           </p>
-          <p className="text-gray-700 mb-2 col-span-2 flex items-center">
-            La implementación de Sistemas de Monitoreo de Inventario en Tiempo
-            Real (SMTR) se presenta como una respuesta eficaz a los desafíos que
-            enfrenta el ámbito hospitalario en la gestión de inventarios y
-            equipos médicos. Estos sistemas ofrecen una solución integral al
-            problema, al proporcionar un registro automatizado de productos y
-            bienes, así como la capacidad de realizar un seguimiento constante
-            dentro de áreas específicas monitoreadas
+
+          <p className="text-gray-700 mb-2 col-span-2 flex flex-col items-center">
+            <h2 className="text-2xl font-semibold mb-4 col-span-3 text-left">
+              ¿Qué Hacemos?
+            </h2>
+            Hemos desarrollado una solución avanzada de monitoreo de movimiento
+            para quirófanos que utiliza sensores de última generación y
+            tecnologías de Internet de las Cosas (IoT). Nuestro sistema recoge y
+            analiza datos en tiempo real para proporcionar una visión integral
+            del uso del quirófano, permitiendo a los hospitales:
+            <li>
+              Maximizar la Utilización del Quirófano: Reduciendo el tiempo de
+              inactividad y optimizando la programación de cirugías.
+            </li>
+            <li>
+              Mejorar la Planificación y Gestión: Ofreciendo datos precisos y
+              análisis predictivos que facilitan la toma de decisiones
+              informadas.
+            </li>
+            <li>
+              Aumentar la Satisfacción del Paciente: Reduciendo los tiempos de
+              espera y mejorando la experiencia general del paciente.
+            </li>
           </p>
           <ImageWithCaption
             src="https://tediselmedical.com/wp-content/uploads/2023/11/hospitales_inteligentes_pic01_20231102_tedisel_medical-1440x960.jpg"
