@@ -17,6 +17,7 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DevicesFoldIcon from "@mui/icons-material/DevicesFold";
 import GamepadIcon from '@mui/icons-material/Gamepad';
+import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 
 
 import Home from "../pages/Home";
@@ -29,6 +30,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 import MainProvider from "../providers/MainProvider";
 import Sensor from "../pages/Sensor"
 import ButtonPage from "../pages/ButtonPage";
+import LastValues from "@/pages/LastValues";
+import InfoIcon from '@mui/icons-material/Info';
 
 const AppRouter = () => {
   const { collapseSidebar } = useProSidebar();
@@ -57,12 +60,6 @@ const AppRouter = () => {
           </MenuItem>
           <MenuItem icon={<HomeOutlinedIcon />} component={<Link to="/" />}>
             Home
-          </MenuItem>
-          <MenuItem
-            icon={<PeopleOutlinedIcon />}
-            component={<Link to="/about" />}
-          >
-            About
           </MenuItem>
           <MenuItem
             icon={<DevicesFoldIcon />}
@@ -100,6 +97,18 @@ const AppRouter = () => {
           >
             Estados del botón
           </MenuItem>
+          <MenuItem
+            icon={<ViewAgendaIcon  />}
+            component={<Link to="/lastValues" />}
+          >
+            Ultimos valores
+          </MenuItem>
+          <MenuItem
+            icon={<InfoIcon/>}
+            component={<Link to="/about" />}
+          >
+            About
+          </MenuItem>
           
           <div className="flex justify-end mt-8">
             <ModeToggle />
@@ -117,6 +126,7 @@ const AppRouter = () => {
             <Route path="/devices" element={<Devices />} />
             <Route path= "/sensor" element={<Sensor/>}/>
             <Route path= "/button" element={<ButtonPage/>}/>
+            <Route path= "/lastValues" element={<LastValues/>}/>
             <Route path="*" element={<h1>Not Found</h1>} />
           </Route>
         </Routes>

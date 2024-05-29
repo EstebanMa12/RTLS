@@ -1,5 +1,12 @@
-import { useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
+import axios from "axios";
 const CurrentDataSensor = ()=>{
+    const [labels, setLabels] = useState(null)
+    const [activeTimeData, setActiveTimeData] = useState(null)
+    const [inactiveTimeData, setInactiveTimeData] = useState(null)
+    const [currentActiveTime, setCurrentActiveTime] = useState(null)
+    const [currentInactiveTime, setCurrentInactiveTime] = useState(null)
 
     
     const date = new Date();
