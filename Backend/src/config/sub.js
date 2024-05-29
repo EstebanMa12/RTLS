@@ -16,7 +16,6 @@ function startMQTTSubscriber() {
 
     client.on('message', async function (topic, message) {
         const data = JSON.parse(message.toString())
-        // console.log(data)
         try {
             await createSensorValue(data);
         } catch (error) {

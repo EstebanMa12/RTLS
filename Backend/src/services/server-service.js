@@ -10,7 +10,8 @@ const {
     updateButton,
     deleteButton,
     buttonValues,
-    sensorValues
+    sensorValues,
+    generateCompleteUsageReport
 } = require("../repositories/server-mongo.repository");
 
 
@@ -113,6 +114,14 @@ const getButtonValues = async (page, pageSize) => {
     }
 }
 
+const generateCompleteSensorReport = async (startDate, endDate) => {
+    try {
+        return generateCompleteUsageReport(startDate, endDate)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     createSensorValue,
     updateSensorValue,
@@ -125,6 +134,7 @@ module.exports = {
     updateSensorButton,
     deleteSensorButton,
     getSensorValues,
-    getButtonValues
+    getButtonValues,
+    generateCompleteSensorReport
 }
 

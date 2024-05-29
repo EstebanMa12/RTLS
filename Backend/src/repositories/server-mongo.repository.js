@@ -16,33 +16,73 @@ const createRecord = async (data) => {
     }
 }
 
-const calculateUsageStatistics = async (startDate, endDate) => {
+const calculateUsageStatistics = async () => {
     try {
-        if (!startDate || !endDate) {
-            return SensorDB.find();
-        }
+        const currentTimestamp = new Date();
+        const startOfHour = new Date(currentTimestamp);
+        startOfHour.setMinutes(0, 0, 0); // Inicio de la hora actual
+        const endOfHour = new Date(startOfHour);
+        endOfHour.setHours(endOfHour.getHours() + 1, 0, 0, -1); // Fin de la hora actual
 
-        const startOfDay = `${startDate}T00:00:00.000Z`;
-        const endOfDay = `${endDate}T23:59:59.999Z`;
+        const values = await SensorDB.find({
+            date: {
+                $gte: startOfHour.toISOString(),
+                $lte: endOfHour.toISOString()
+            }
+        });
 
-        const values = SensorDB.find({
+        let activeTime = 0;
+        let inactiveTime = 0;
+
+        values.forEach((entry) => {
+            if (entry.movement) {
+                activeTime += 20; // Incrementar tiempo activo por 20 segundos
+            } else {
+                inactiveTime += 20; // Incrementar tiempo inactivo por 20 segundos
+            }
+        });
+
+        return { activeTime: activeTime / 60, inactiveTime: inactiveTime / 60 };
+
+    } catch (error) {
+        console.error('Error: ', error);
+        throw error;
+    }
+}
+
+
+
+const getDailyUsageStatistics = async (startDate, endDate) => {
+    try {
+        const startOfDay = new Date(`${startDate}T00:00:00.000Z`);
+        const endOfDay = new Date(`${endDate}T23:59:59.999Z`);
+
+        const values = await SensorDB.find({
             date: {
                 $gte: startOfDay,
                 $lte: endOfDay
             }
         });
-        let activeTime = 0;
-        let inactiveTime = 0;
-        values.forEach((entry, index) => {
-            if (entry.movement) {
-                activeTime += 20;
-            } else {
-                inactiveTime += 20;
+
+        const dailyStats = {};
+        values.forEach((entry) => {
+            const date = entry.date.toISOString().split('T')[0]; // Extraer la fecha
+            if (!dailyStats[date]) {
+                dailyStats[date] = { activeTime: 0, inactiveTime: 0 };
             }
-        })
+            if (entry.movement) {
+                dailyStats[date].activeTime += 20;
+            } else {
+                dailyStats[date].inactiveTime += 20;
+            }
+        });
 
-        return { activeTime: activeTime / 60, inactiveTime: inactiveTime / 60 };
+        for (const date in dailyStats) {
+            dailyStats[date].activeTime /= 60;
+            dailyStats[date].inactiveTime /= 60;
+        }
 
+        return dailyStats;
 
     } catch (error) {
         console.error('Error: ', error);
@@ -71,6 +111,19 @@ const generateUsageReport = async (startDate, endDate) => {
     }
 }
 
+const generateCompleteUsageReport = async (startDate, endDate) => {
+    try {
+        const dailyStats = await getDailyUsageStatistics(startDate, endDate);
+        const currentStats = await calculateUsageStatistics();
+
+        return { dailyStats, currentStats };
+
+    } catch (error) {
+        console.error('Error: ', error);
+        throw error;
+    }
+}
+
 const checkForAlerts = async () => {
     try {
         const now = new Date();
@@ -90,7 +143,7 @@ const checkForAlerts = async () => {
 const getValuesByDate = async (date) => {
     try {
         if (!date) {
-            return SensorDB.find();
+            return {values: await SensorDB.find(), buttons: await ButtonDB.find()}
         }
 
         const startOfDay = `${date}T00:00:00.000Z`;
@@ -118,8 +171,8 @@ const getValuesByDate = async (date) => {
 }
 const getLastValues = async () => {
     try {
-        const values = await SensorDB.find().sort({ date: -1 }).limit(1);
-        const buttons = await ButtonDB.find().sort({ date: -1 }).limit(1);
+        const values = await SensorDB.find().sort({ date: -1 }).limit(2);
+        const buttons = await ButtonDB.find().sort({ date: -1 }).limit(2);
 
         return { values, buttons };
     } catch (error) {
@@ -176,9 +229,65 @@ const deleteButton = async (id) => {
     }
 }
 
+const calculateHourlyAverages = (values ) => {
+    try {
+
+        if (!values.length) {
+            return { averageActiveTime: 0, averageInactiveTime: 0 };
+        }
+
+        const hourlyStats = {};
+        values.forEach((entry) => {
+            const hour = new Date(entry.date).toISOString().substring(0, 13); // Extract hour part
+
+            if (!hourlyStats[hour]) {
+                hourlyStats[hour] = { activeTime: 0, inactiveTime: 0, count: 0 };
+            }
+
+            if (entry.movement) {
+                hourlyStats[hour].activeTime += 20;
+            } else {
+                hourlyStats[hour].inactiveTime += 20;
+            }
+
+            hourlyStats[hour].count += 1;
+        });
+
+        let totalActiveTime = 0;
+        let totalInactiveTime = 0;
+        let totalHours = 0;
+
+        for (const hour in hourlyStats) {
+            totalActiveTime += hourlyStats[hour].activeTime;
+            totalInactiveTime += hourlyStats[hour].inactiveTime;
+            totalHours += 1;
+        }
+
+        const averageActiveTime = totalActiveTime / (totalHours * 60);
+        const averageInactiveTime = totalInactiveTime / (totalHours * 60);
+
+        return { averageActiveTime, averageInactiveTime };
+    } catch (error) {
+        console.error('Error: ', error);
+        throw error;
+    }
+};
+
+
 const sensorValues = async (page, pageSize) => {
     try {
-        return page && pageSize ? SensorDB.find().skip((page - 1) * pageSize).limit(pageSize) : SensorDB.find();
+        const values = await SensorDB.find().sort({ date: 1 });
+        const { averageActiveTime, averageInactiveTime } = calculateHourlyAverages(values);
+
+        const paginatedValues = page && pageSize
+            ? values.slice((page - 1) * pageSize, page * pageSize)
+            : values;
+
+        return {
+            paginatedValues,
+            averageActiveTime,
+            averageInactiveTime
+        };
     }
     catch (error) {
         console.error('Error: ', error);
@@ -188,7 +297,18 @@ const sensorValues = async (page, pageSize) => {
 
 const buttonValues = async (page, pageSize) => {
     try {
-        return page && pageSize ? ButtonDB.find().skip((page - 1) * pageSize).limit(pageSize) : ButtonDB.find();
+        const buttons = await ButtonDB.find().sort({ date: 1 });
+        const { averageActiveTime, averageInactiveTime } = calculateHourlyAverages(buttons);
+
+        const paginatedButtons = page && pageSize
+            ? buttons.slice((page - 1) * pageSize, page * pageSize)
+            : buttons;
+
+        return {
+            paginatedButtons,
+            averageActiveTime,
+            averageInactiveTime
+        };
     }
     catch (error) {
         console.error('Error: ', error);
@@ -208,7 +328,8 @@ module.exports = {
     updateButton,
     deleteButton,
     sensorValues,
-    buttonValues
+    buttonValues,
+    generateCompleteUsageReport,
 }
 
 
