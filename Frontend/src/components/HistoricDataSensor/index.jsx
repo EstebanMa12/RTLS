@@ -14,6 +14,16 @@ import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -33,48 +43,43 @@ const HistoricDataSensor = () => {
       },
       title: {
         display: true,
-        text: "Historic DATA",
+        text: "Historic data sensor",
       },
     },
   };
+  const [page, setPage] = useState(1);
   const [activeTimeData, setActiveTimeData] = useState([]);
   const [inactiveTimeData, setInactiveTimeData] = useState([]);
   const [labels, setLabels] = useState([]);
-  const [currentActiveTime, setCurrentActiveTime] = useState(0);
-  const [currentInactiveTime, setCurrentInactiveTime] = useState(0);
 
-  const date = new Date();
-  date.setHours(date.getHours() - 5);
-  // Today date
-  const currentDate = date.toISOString().slice(0, 10);
-
+  const pageSize = 10;
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/sensor/report/${currentDate}/`)
+      .get(
+        `${
+          import.meta.env.VITE_API_URL
+        }/sensors/?page=${page}&pageSize=${pageSize}/`
+      )
       .then((res) => {
-        const dailyStats = res.data.dailyStats;
-        const currentStats = res.data.currentStats;
-        const dailyData = res.data.fiveMinuteIntervals;
-        const labels = dailyData.map((data) => data.start.slice(11,16));
+        const historicalData = res.data.paginatedValues;
+        const labels = historicalData.map((data) => data.start.slice(0, 10));
 
-        const activeTimeData = dailyData.map((data) => {
-            return data.activeTime;
-            });
+        const activeTimeData = historicalData.map((data) => {
+          return data.activeTime;
+        });
 
-        const inactiveTimeData = dailyData.map((data) => {
-            return data.inactiveTime;
-            });
+        const inactiveTimeData = historicalData.map((data) => {
+          return data.inactiveTime;
+        });
 
         setLabels(labels);
         setActiveTimeData(activeTimeData);
         setInactiveTimeData(inactiveTimeData);
-        setCurrentActiveTime(currentStats.activeTime);
-        setCurrentInactiveTime(currentStats.inactiveTime);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [page]);
   const chartData = {
     labels: labels,
     datasets: [
@@ -95,13 +100,46 @@ const HistoricDataSensor = () => {
   };
   return (
     <div
-      className="w-full
+      className="
+    w-[calc(100%-2rem)]
     flex
+    flex-col
     items-center
     justify-center
+    p-4
+    shadow-md
+    rounded-md
+    md:h-1/2
     "
     >
       <Line data={chartData} options={options} />
+      <Pagination>
+        <PaginationContent
+        className="
+        flex
+        items-center
+        justify-between
+        w-full
+
+        ">
+          <PaginationPrevious
+          className="mr-auto
+          cursor-pointer
+          "
+          onClick={() => {
+            setPage(page - 1);
+          }}
+          >Previous</PaginationPrevious>
+          <PaginationNext
+          className="ml-auto
+          cursor-pointer 
+          "
+          onClick={() => {
+            setPage(page + 1);
+          }}
+          >Next</PaginationNext>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };

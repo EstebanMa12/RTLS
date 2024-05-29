@@ -22,6 +22,7 @@ import Report from "../pages/Report";
 import Calendar from "../pages/Calendar";
 import Devices from "../pages/Devices";
 import { ModeToggle } from "@/components/mode-toggle";
+import MainProvider from "../providers/MainProvider";
 
 const AppRouter = () => {
   const { collapseSidebar } = useProSidebar();
@@ -88,13 +89,15 @@ const AppRouter = () => {
       </Sidebar>
       <section className=" w-full">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/register" element={<RegisterDevice />} />
-          <Route path="/report" element={<Report />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/devices" element={<Devices />} />
-          <Route path="*" element={<h1>Not Found</h1>} />
+          <Route path="/" element={<MainProvider/>}>
+            <Route index element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/register" element={<RegisterDevice />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/devices" element={<Devices />} />
+            <Route path="*" element={<h1>Not Found</h1>} />
+          </Route>
         </Routes>
       </section>
     </div>

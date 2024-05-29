@@ -10,15 +10,7 @@ const Home = () => {
         subtitle="Transformando la gestión de inventarios en el ámbito hospitalario"
       />
       <HistoricDataSensor />
-      
-      <div className="flex justify-center mt-8">
-        <Button>Botón</Button>
-      </div>
-      <footer className="bg-gray-800 text-white p-4 mt-8">
-        <p className="text-center">
-          &copy; 2024 Proyecto SMTR - Todos los derechos reservados
-        </p>
-      </footer>
+
     </div>
   );
 };
