@@ -90,7 +90,7 @@ const AppRouter = () => {
           </div>
         </Menu>
       </Sidebar>
-      <section className=" w-full">
+      <section className=" w-full flex flex-col justify-between">
         <Routes>
           <Route path="/" element={<MainProvider/>}>
             <Route index element={<Home />} />
