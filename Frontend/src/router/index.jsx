@@ -8,6 +8,7 @@ import {
 } from "react-pro-sidebar";
 import { Route, Routes } from "react-router-dom";
 import { Link } from "react-router-dom";
+import SensorsIcon from '@mui/icons-material/Sensors';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
@@ -15,6 +16,9 @@ import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DevicesFoldIcon from "@mui/icons-material/DevicesFold";
+import GamepadIcon from '@mui/icons-material/Gamepad';
+
+
 import Home from "../pages/Home";
 import About from "../pages/About";
 import RegisterDevice from "../pages/RegisterDevice";
@@ -23,6 +27,8 @@ import Calendar from "../pages/Calendar";
 import Devices from "../pages/Devices";
 import { ModeToggle } from "@/components/mode-toggle";
 import MainProvider from "../providers/MainProvider";
+import Sensor from "../pages/Sensor"
+import ButtonPage from "../pages/ButtonPage";
 
 const AppRouter = () => {
   const { collapseSidebar } = useProSidebar();
@@ -82,6 +88,19 @@ const AppRouter = () => {
           >
             Calendario
           </MenuItem>
+          <MenuItem
+            icon={<SensorsIcon />}
+            component={<Link to="/sensor" />}
+          >
+            Datos del sensor
+          </MenuItem>
+          <MenuItem
+            icon={<GamepadIcon />}
+            component={<Link to="/button" />}
+          >
+            Estados del botón
+          </MenuItem>
+          
           <div className="flex justify-end mt-8">
             <ModeToggle />
           </div>
@@ -96,6 +115,8 @@ const AppRouter = () => {
             <Route path="/report" element={<Report />} />
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/devices" element={<Devices />} />
+            <Route path= "/sensor" element={<Sensor/>}/>
+            <Route path= "/button" element={<ButtonPage/>}/>
             <Route path="*" element={<h1>Not Found</h1>} />
           </Route>
         </Routes>
