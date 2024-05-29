@@ -4,8 +4,8 @@ const About = () => {
   return (
     <div className="p-6 ">
       <Header
-        title="Sistema de Monitoreo de Inventario en Tiempo Real"
-        subtitle="Transformando la gestión de inventarios en el ámbito hospitalario"
+        title="Sistema de Monitoreo de Quirofános mediante sensores de movimiento "
+        subtitle="Transformando la gestión de quirofános en el ámbito hospitalario"
       />
       <main
         className="container mx-auto mt-8 w-full
@@ -21,21 +21,21 @@ const About = () => {
             gap-6
             "
         >
-          <h2 className="text-2xl font-semibold col-span-3">Introducción</h2>
+          <h2 className="text-2xl font-semibold col-span-3">Nuestra Misión</h2>
           <p className="text-gray-700 col-span-2 flex items-center">
-            En general, para que las actividades logísticas tengan un buen
-            resultado se deben cumplir siete condiciones: el material adecuado,
-            en el momento adecuado, en la cantidad adecuada, por el costo
-            adecuado, de la calidad adecuada, con la información adecuada en el
-            lugar adecuado. Si se cumplen estas características, se habla de una
-            buena gestión logística .
+            En RTLS , nuestra misión es transformar la gestión de los quirófanos
+            a través de tecnologías innovadoras, mejorando la eficiencia
+            operativa y la calidad de atención a los pacientes. Creemos que la
+            optimización del uso de quirófanos no solo reduce costos y tiempos
+            de espera, sino que también salva vidas al facilitar una atención
+            médica más rápida y efectiva.
           </p>
           <ImageWithCaption
-            src="https://emedingenieria.com/wp-content/uploads/2023/07/maintenance.webp"
+            src="https://assets-global.website-files.com/62a811481c9610ad2f6310b2/64c2ba8acc53d81d5883bf71_Tipos%20de%20sensores%20de%20movimiento.jpg"
             alt="RTLS"
           />
           <ImageWithCaption
-            src="https://www.eoi.es/blogs/madeon/files/2013/06/inventarios1.jpg"
+            src="https://tediselmedical.com/wp-content/uploads/2023/11/hospitales_inteligentes_pic03_20231102_tedisel_medical-1440x807.jpg"
             alt="RTLS"
           />
           <p className="text-gray-700 flex items-center col-span-2">
@@ -70,7 +70,7 @@ const About = () => {
             dentro de áreas específicas monitoreadas
           </p>
           <ImageWithCaption
-            src="https://www.hhmglobal.com/wp-content/uploads/articles/23092/RTL_Systems.jpg"
+            src="https://tediselmedical.com/wp-content/uploads/2023/11/hospitales_inteligentes_pic01_20231102_tedisel_medical-1440x960.jpg"
             alt="RTLS"
           />
           <p className="text-gray-700 mb-2">
@@ -86,7 +86,7 @@ const About = () => {
           </p>
           <div className="flex  col-span-2">
             <ImageWithCaption
-              src="https://rmsomega.com/wp-content/uploads/2021/09/Sewio-RTLS-Use-Case_-Indoor-Location-Tracking-Positioning-low-1.gif"
+              src="https://cdn.shopify.com/s/files/1/0496/1153/8592/files/PIR_V2.0.gif?v=1630472554"
               alt="RTLS"
             />
           </div>
@@ -108,7 +108,7 @@ const About = () => {
             centímetros.
           </p>
           <ImageWithCaption
-            src="https://cdn.sewio.net/wp-content/uploads/2020/07/Indoor-GPS-Tracking.png"
+            src="https://i.gifer.com/MqyW.gif"
             alt="Indoor GPS tracking"
           />
         </section>

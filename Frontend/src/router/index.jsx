@@ -58,33 +58,6 @@ const AppRouter = () => {
               RTLS System
             </h2>
           </MenuItem>
-          <MenuItem icon={<HomeOutlinedIcon />} component={<Link to="/" />}>
-            Home
-          </MenuItem>
-          <MenuItem
-            icon={<DevicesFoldIcon />}
-            component={<Link to="/devices" />}
-          >
-            Devices Information
-          </MenuItem>
-          <MenuItem
-            icon={<ContactsOutlinedIcon />}
-            component={<Link to="/register" />}
-          >
-            Registrar Equipo
-          </MenuItem>
-          <MenuItem
-            icon={<ReceiptOutlinedIcon />}
-            component={<Link to="/report" />}
-          >
-            Reporte
-          </MenuItem>
-          <MenuItem
-            icon={<CalendarTodayOutlinedIcon />}
-            component={<Link to="/calendar" />}
-          >
-            Calendario
-          </MenuItem>
           <MenuItem
             icon={<SensorsIcon />}
             component={<Link to="/sensor" />}
@@ -108,6 +81,35 @@ const AppRouter = () => {
             component={<Link to="/about" />}
           >
             About
+          </MenuItem>
+        {/* ------------------------------------------------ */}
+          <MenuItem
+            icon={<ContactsOutlinedIcon />}
+            component={<Link to="/register" />}
+          >
+            Registrar Equipo
+          </MenuItem>
+          <MenuItem
+            icon={<ReceiptOutlinedIcon />}
+            component={<Link to="/report" />}
+          >
+            Reporte
+          </MenuItem>
+          <MenuItem
+            icon={<CalendarTodayOutlinedIcon />}
+            component={<Link to="/calendar" />}
+          >
+            Calendario
+          </MenuItem>
+
+          <MenuItem icon={<HomeOutlinedIcon />} component={<Link to="/" />}>
+            Home
+          </MenuItem>
+          <MenuItem
+            icon={<DevicesFoldIcon />}
+            component={<Link to="/devices" />}
+          >
+            Devices Information
           </MenuItem>
           
           <div className="flex justify-end mt-8">
