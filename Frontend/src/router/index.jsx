@@ -53,7 +53,6 @@ const AppRouter = () => {
   },[buttons])
 
   const isButtonActive =  buttons[0].state 
-   console.log(isButtonActive)
 
   return (
     <>
