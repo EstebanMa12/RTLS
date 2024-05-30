@@ -24,7 +24,7 @@ const LastValues = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [values, buttons]);
 
   return (
     <>
