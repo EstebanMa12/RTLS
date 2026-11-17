@@ -9,11 +9,10 @@ const CurrentDataSensor = ()=>{
     const [currentInactiveTime, setCurrentInactiveTime] = useState(null)
 
     
-    const date = new Date();
-    date.setHours(date.getHours() - 5);
-    // Today date
-    const currentDate = date.toISOString().slice(0, 10);
     useEffect(() => {
+        const date = new Date();
+        date.setHours(date.getHours() - 5);
+        const currentDate = date.toISOString().slice(0, 10);
         axios
           .get(`${import.meta.env.VITE_API_URL}/sensor/report/${currentDate}/`)
           .then((res) => {

@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-
-
 const ImageWithCaption = ({ src, alt}) => (
     <div className="flex flex-col 
     items-center

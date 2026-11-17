@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Header from '../../components/Header';
 import getProducts from '../../services/services';

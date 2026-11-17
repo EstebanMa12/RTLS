@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { createContext } from "react";
 import { Outlet } from "react-router-dom";
 

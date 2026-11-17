@@ -13,9 +13,16 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react/jsx-no-target-blank': 'off',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+    // The shadcn/ui components in this repo are plain JavaScript and do not
+    // declare PropTypes. Keep the rule off so lint matches the existing code.
+    'react/prop-types': 'off',
+    // shadcn files export a hook or cva variants next to the component.
+    'react-refresh/only-export-components': 'off',
   },
+  overrides: [
+    {
+      files: ['tailwind.config.js', '*.cjs'],
+      env: { node: true },
+    },
+  ],
 }
