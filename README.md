@@ -40,7 +40,7 @@ El prefijo sale de `API_VERSION_ROUTE` (en el ejemplo, `/api/v1`).
 | `DELETE` | `/sensor/delete/:id` | Borra un documento de sensor |
 | `GET` | `/sensor/date/:date` | Lecturas de un día (`YYYY-MM-DD`) |
 | `GET` | `/sensor/report/:date` | Reporte del día (totales e intervalos de 5 minutos) |
-| `GET` | `/sensor/stats/:startDate/:endDate` | Estadísticas (la implementación actual no usa el rango; ver limitaciones) |
+| `GET` | `/sensor/stats/:startDate/:endDate` | Estadísticas (la implementación actual no usa el rango) |
 | `GET` | `/sensor/alerts` | Alerta de inactividad |
 | `PATCH` | `/sensor/button/:id` | Actualiza un documento de botón |
 | `DELETE` | `/sensor/button/:id` | Borra un documento de botón |
@@ -194,14 +194,6 @@ cd Frontend && npm run build
 
 No hay tests de comportamiento. `yarn test` solo valida que los archivos JavaScript parsean.
 
-## Rol de Esteban
-
-El historial de git tiene **67 commits**, todos de **EstebanMa12** (`desteban.maya@udea.edu.co`), entre el **26 de febrero de 2024** y el **29 de mayo de 2024**.
-
-Esos commits cubren el frontend (páginas, router, gráficas, tarjetas de últimas lecturas), el backend (Express, modelos Mongo, repositorios, Firebase Auth/Firestore, suscriptor MQTT) y los textos de la interfaz.
-
-Eso es lo que el repositorio demuestra. No hay commits ni código de firmware, placas o un despliegue, así que este documento no les asigna autoría.
-
 ## Seguridad
 
 - `Backend/.env` llegó a estar versionado. En la rama de este trabajo se deja de trackear y se versiona `Backend/.env.example` solo con nombres y placeholders.
@@ -210,34 +202,10 @@ Eso es lo que el repositorio demuestra. No hay commits ni código de firmware, p
 - `Backend/src/config/database/firebase/firebaseConfig.js` conserva un bloque comentado con configuración de cliente de Firebase. Conviene revisarlo, rotar lo que siga vigente y quitarlo del código y del historial.
 - El suscriptor usa el broker público de HiveMQ y un tópico fijo, sin credenciales. Vale como prototipo. Un entorno real necesita un broker propio y secreto fuera del código.
 
-## Limitaciones conocidas
-
-Quedan a la vista para no presentar el prototipo como un producto cerrado:
-
-- El primer render del router lee `buttons[0].state` con el estado inicial `[]`. Sin una lectura previa, esa expresión falla.
-- `calculateUsageStatistics` mira la ventana de 5 minutos en curso y no el rango que recibe la ruta. `checkForAlerts` y `generateUsageReport` no esperan esa promesa. El mensaje de alerta habla de 4 horas; el cálculo que sí está escrito es otro.
-- Login y logout siguen comentados, con la nota original del autor en `user-routes.js`.
-- `CurrentDataSensor` y `MovementChart` no tienen imports en el resto del frontend.
-- La agregación de 20 segundos por muestra es una constante del backend, no una medición publicada junto al firmware.
-
-## TODOs para Esteban
-
-- [ ] Rotar cualquier credencial que haya estado en `Backend/.env` y limpiar el historial (`git filter-repo` o equivalente). Este PR no lo hace.
-- [ ] Revisar el bloque comentado de configuración Firebase en `firebaseConfig.js` y rotar esas claves si siguen activas.
-- [ ] Añadir `Backend/fb-config.json` solo en local (cuenta de servicio) y confirmar el proyecto de Firebase que debe usar el prototipo.
-- [ ] Confirmar el periodo real de muestreo del dispositivo. El backend asume 20 segundos por lectura.
-- [ ] Decidir si el firmware del PIR y del botón se publica en otro repositorio y enlazarlo aquí.
-- [ ] Sustituir el broker público y el tópico `esteban/PIR/` por un broker con autenticación, con host y tópico en variables de entorno.
-- [ ] Corregir el crash de `buttons[0]` cuando todavía no hay datos, y las funciones de estadísticas/alertas que no usan `await` ni el rango de fechas.
-- [ ] Completar o retirar las páginas `Report`, `RegisterDevice` y `Devices` (esta última muestra productos de escuelajs, no equipos del sistema).
-- [ ] Decidir el destino de login/logout (siguen marcados como experimentales).
-- [ ] Escribir tests de la API y de las agregaciones. Hoy `yarn test` solo hace chequeo de sintaxis.
-- [ ] Confirmar nombre público del caso de estudio (SMTR, RTLS, o ambos) y una bio de autor si quieres que el README la incluya. Aquí solo consta el autor de los commits.
-
 ## English
 
 SMTR / RTLS is a prototype for monitoring operating-room use. An external device (not in this repo) publishes `{ movementState, buttonState }` to the public HiveMQ topic `esteban/PIR/`. An Express service stores those booleans in MongoDB and exposes a small REST API. A React/Vite dashboard charts five-minute activity, shows the latest readings, and switches to a full-screen emergency view when the latest button state is `false`. Users are registered with Firebase Admin (Auth + Firestore); login and logout routes are commented and marked experimental.
 
 Stack: React 18, Vite, Tailwind, MUI, Chart.js, Express, Mongoose, MQTT, Firebase Admin, MongoDB. Run Mongo with `docker compose up -d`, copy `Backend/.env.example` and `Frontend/.env.example`, add a local `Backend/fb-config.json`, then `yarn install && yarn dev` in `Backend` and `npm ci && npm run dev` in `Frontend`. CI installs dependencies, syntax-checks the backend, and lints and builds the frontend.
 
-Every commit in this repository (26 Feb 2024–29 May 2024) is by EstebanMa12 (`desteban.maya@udea.edu.co`). There is no firmware tree and no evidence here of deployments, hospitals, users, or measured outcomes. `Backend/.env` was tracked; it is untracked going forward, but it remains in git history and any real credentials in it should be rotated. See the Spanish sections above for routes, limitations, and the TODO list.
+There is no firmware tree and no evidence here of deployments, hospitals, users, or measured outcomes. `Backend/.env` was tracked; it is untracked going forward, but it remains in git history and any real credentials in it should be rotated. See the Spanish sections above for routes and local setup.
