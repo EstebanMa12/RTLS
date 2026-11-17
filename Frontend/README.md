@@ -1,4 +1,6 @@
 # FrontEnd
+
+La guía actualizada del repositorio (arquitectura, variables y arranque) está en el [README de la raíz](../README.md). Lo de abajo se conserva como notas originales de instalación.
 ## Installation 
 To install the project dependencies, ensure you have Yarn installed and follow these steps:
 

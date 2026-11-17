@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import HistoricData from "@/components/HistoricData";
 import { useEffect, useState } from "react";
 import axios from "axios";

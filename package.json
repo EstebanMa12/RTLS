@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "install:backend": "yarn --cwd Backend install --frozen-lockfile",
+    "install:frontend": "npm --prefix Frontend ci",
+    "dev:backend": "yarn --cwd Backend dev",
+    "dev:frontend": "npm --prefix Frontend run dev",
+    "test:backend": "yarn --cwd Backend test",
+    "lint:frontend": "npm --prefix Frontend run lint",
+    "build:frontend": "npm --prefix Frontend run build"
+  }
+}

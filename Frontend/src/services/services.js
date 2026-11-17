@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import  axios  from "axios"
 const url = 'https://api.escuelajs.co/api/v1/products'
 
